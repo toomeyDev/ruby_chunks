@@ -20,9 +20,11 @@ end
 def substrings(dictionary, *match_phrases)
   # get the number of matches for the given phrase in the dictionary
   dictionary.reduce(Hash.new(0)) do |result, string|
-    if match_phrases.include? string
-      result[match_phrases] += 1
-    end
+     match_phrases.each do |match_string|
+      if string.include? match_string
+		 result[match_string] += 1
+      end
+     end
       result
   end
 end
