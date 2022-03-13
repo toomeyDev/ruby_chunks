@@ -17,14 +17,16 @@ def get_dictionary
   dict
 end
 
-def substrings(match_phrase, dictionary)
+def substrings(dictionary, *match_phrases)
   # get the number of matches for the given phrase in the dictionary
   dictionary.reduce(Hash.new(0)) do |result, string|
-    if string.downcase == match_phrase.downcase
-      result[match_phrase] += 1
+    if match_phrases.include? string
+      result[match_phrases] += 1
     end
       result
   end
 end
 
-puts substrings("the", get_dictionary)
+puts substrings(get_dictionary, "the", "or")
+puts substrings(get_dictionary, "house", "tomato", "the", "i")
+puts substrings(get_dictionary, "")
