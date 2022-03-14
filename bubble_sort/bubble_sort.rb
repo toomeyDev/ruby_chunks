@@ -1,16 +1,27 @@
 puts "Bubble Sort"
 
 def bubble_sort(array)
-  array.each_with_index do |element, index|
-    if index+1 < array.size && element > array[index+1]
+  sorted = array.clone
+  swapped = false
+
+  sorted.each_with_index do |element, index|
+    if index+1 < sorted.size && element > sorted[index+1]
       temp = element
-      array[index] = array[index+1]
-      array[index+1] = temp
+      sorted[index] = sorted[index+1]
+      sorted[index+1] = temp
+      swapped = true
     end
-    p array
   end
-  array
+  
+  unless !swapped
+    bubble_sort(sorted) # if not fully sorted, recall the method with the last sort completed
+  else
+    return sorted # once sorting is complete return final sorted array
+  end
+  
 end
 
-bubble_sort([2,1,4,3,5])
-bubble_sort([4,3,78,2,0,2])
+p bubble_sort([2,1,4,3,5])
+p bubble_sort([4,3,78,2,0,2])
+p bubble_sort([-5, 99, 101, 6, 76, 32, 509, -12, 50, 0, 23])
+p bubble_sort([-99, -100, -150, -153, 0, 250, -999])
