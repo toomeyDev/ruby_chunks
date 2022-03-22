@@ -115,7 +115,7 @@ class Board
 
   # handle marking of individual spots for each player
   def mark_spot(player, pos)
-    @cells[pos] = 1
+    @cells[pos] = player.shape
   end
 
   # check to ensure spots are empty before allowing player to mark them
@@ -124,29 +124,30 @@ class Board
   end
 
   # check for all possible victory conditions on the board
-  def victory_check
-    if @cells[0..2].join == '111'
+  def victory_check(player)
+    shape = player.shape
+    if @cells[0..2].join == (shape + shape + shape)
       puts 'winner!'
       return true
-    elsif @cells[3..5].join == '111'
+    elsif @cells[3..5].join == (shape + shape + shape)
       puts 'winner!'
       return true
-    elsif @cells[6..8].join == '111'
+    elsif @cells[6..8].join == (shape + shape + shape)
       puts 'winner!'
       return true
-    elsif @cells[0] == 1 && @cells[4] == 1 && @cells[8] == 1
+    elsif @cells[0] == shape && @cells[4] == shape && @cells[8] == shape
       puts 'winner!'
       return true
-    elsif @cells[2] == 1 && @cells[4] == 1 && @cells[6] == 1
+    elsif @cells[2] == shape && @cells[4] == shape && @cells[6] == shape
       puts 'winner!'
       return true
-    elsif @cells[0] == 1 && @cells[3] == 1 && @cells[6] == 1
+    elsif @cells[0] == shape && @cells[3] == shape && @cells[6] == shape
       puts 'winner!'
       return true
-    elsif @cells[1] == 1 && @cells[4] == 1 && @cells[7] == 1
+    elsif @cells[1] == shape && @cells[4] == shape && @cells[7] == shape
       puts 'winner!'
       return true
-    elsif @cells[2] == 1 && @cells[5] == 1 && @cells[8] == 1
+    elsif @cells[2] == shape && @cells[5] == shape && @cells[8] == shape
       puts 'winner!'
       return true 
     end
@@ -159,10 +160,10 @@ class Board
     while true do
       puts "#{@player1.name}'s turn."
       @player1.choose_spot(self)
-      break if victory_check
+      break if victory_check(@player1)
       puts "#{@player2.name}'s turn."
       @player2.choose_spot(self)
-      break if victory_check
+      break if victory_check(@player2)
     end
   end
 
