@@ -14,7 +14,7 @@ class Game
     \nOne player is the codemaker, and will choose a hidden code made up of four colors, color choices include red, green, blue, yellow, black and white.
     \nThe other player is the codebreaker, and must guess the codebreaker's code in 12 turns.
     \b\b\b\bCodebreaker will receive feedback after each guess to assist in cracking the code."
-    @code_maker.create_code('red','green','red','blue')
+    @code_maker.create_code
     TURN_LIMIT.times do |turn|
       puts "Turn number: #{turn+1}"
       break if code_guess()

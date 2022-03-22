@@ -1,14 +1,21 @@
+COLORS = ['red','blue','green','yellow','black','white']
+
 class Codemaker
   attr_accessor :hidden_colors
   def initialize
+    @human = false # keep track of whether codemaker is CPU or player
     @hidden_colors = [] # store chosen colors for the code which must be solved
   end
 
-  def create_code(color_a, color_b, color_c, color_d)
-    hidden_colors.append(color_a)
-    hidden_colors.append(color_b)
-    hidden_colors.append(color_c)
-    hidden_colors.append(color_d)
+  def create_code
+    unless @human
+      4.times do
+        color = COLORS[rand(6)]
+        hidden_colors.append(color)
+      end
+    else
+      puts 'human'
+    end
   end
 
 end
@@ -16,7 +23,8 @@ end
 class Codebreaker
   attr_accessor :colors
   def initialize
-    @colors = []
+    @human = true # keep track of whether codebreaker is CPU or player
+    @colors = []   
   end
 
   def get_guess(codemaker)
