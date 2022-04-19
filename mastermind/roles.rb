@@ -46,7 +46,7 @@ class Codebreaker
     guess
   end
 
-  def get_guess(codemaker)
+  def get_guess
     unless @human
       return cpu_guess
     else
