@@ -1,4 +1,4 @@
-require "./roles.rb"
+require_relative "./roles.rb"
 
 TURN_LIMIT = 12
 
@@ -60,7 +60,7 @@ class Game
 
 	
 
-  def intro
+  def gameplay
     puts "|Mastermind|
     \nHow to play:
     \nOne player is the codemaker, and will choose a hidden code made up of four colors, color choices include red, green, blue, yellow, black and white.
@@ -119,4 +119,4 @@ class Game
 end
 
 mastermind_game = Game.new
-mastermind_game.intro
+mastermind_game.gameplay
