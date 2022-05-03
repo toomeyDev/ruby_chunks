@@ -34,6 +34,7 @@ class Game
     def gameplay
         puts "Selecting random word.."
         hidden_word = random_word()
+        puts "Word is #{hidden_word.size} letters long."
         # if debug enabled, display the hidden word at start
         p hidden_word if @debug
         # keep track of any characters guessed by the player
@@ -50,7 +51,7 @@ class Game
     def player_guess(current_word)
         puts "Choose a letter for your guess: "
         print "Guess: "
-        u_choice = gets.chomp
+        u_choice = gets.chomp.downcase
         if u_choice.size > 1
             if u_choice == current_word
                 @guesses += 1
@@ -83,9 +84,9 @@ class Game
         current_guess = ''
         word_characters.each do |character|
             if guesses.include? character
-                current_guess += character
+                current_guess += " #{character}"
             else
-                current_guess += '_'
+                current_guess += ' _'
             end
         end
 
@@ -110,7 +111,11 @@ class Game
             word_index = Random.rand(words.readlines().size)
             words.seek 0
             while word_index > 0
-                word_choice = words.gets.chomp
+            	current_word = words.gets.chomp
+      			# check to ensure words are of appropriate size for hangman
+            	if current_word.length >= 5 && current_word.length <= 7
+                	word_choice = current_word
+                end
                 word_index -= 1
             end
         end
